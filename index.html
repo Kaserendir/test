@@ -1,28 +1,12 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity Web Player | TAOR</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <link rel="manifest" href="manifest.webmanifest">
-    <style>
-      @media (orientation: portrait) {
-        body {
-          transform: rotate(90deg);
-          transform-origin: left top;
-          width: 100vh;
-          height: 100vw;
-          overflow-x: hidden;
-          position: absolute;
-          top: 100%;
-          left: 0;
-        }
-      }
-    </style>    
   </head>
   <body>
     <div id="unity-container">
@@ -36,32 +20,7 @@
       <div id="unity-warning"> </div>
     </div>
     <script>
-      // Initializes the Telegram Web App in fullscreen mode
-      // and locks the screen orientation to landscape.
-      function initTelegramFullscreen() {
-        if (window.Telegram && Telegram.WebApp) {
-          const tg = Telegram.WebApp;
-          
-
-          tg.expand();
-          
-
-          setTimeout(() => {
-            if (tg.requestFullscreen) {
-              tg.requestFullscreen().catch(e => console.log('Fullscreen error:', e));
-            }
-          }, 300);
-          
-
-          if (screen.orientation && screen.orientation.lock) {
-            screen.orientation.lock('landscape')
-              .catch(e => console.log('Orientation lock failed:', e));
-          }
-        }
-      }
-      window.addEventListener('load', () => {
-        initTelegramFullscreen();
-        
+      window.addEventListener("load", function () {
         if ("serviceWorker" in navigator) {
           navigator.serviceWorker.register("ServiceWorker.js");
         }
@@ -135,7 +94,6 @@
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
           loadingBar.style.display = "none";
-          setTimeout(initTelegramFullscreen, 500);
         }).catch((message) => {
           alert(message);
         });
