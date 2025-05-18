@@ -1283,10 +1283,10 @@ function dbg(text) {
 // === Body ===
 
 var ASM_CONSTS = {
-  7582008: () => { Module['emscripten_get_now_backup'] = performance.now; },  
- 7582063: ($0) => { performance.now = function() { return $0; }; },  
- 7582111: ($0) => { performance.now = function() { return $0; }; },  
- 7582159: () => { performance.now = Module['emscripten_get_now_backup']; }
+  7584056: () => { Module['emscripten_get_now_backup'] = performance.now; },  
+ 7584111: ($0) => { performance.now = function() { return $0; }; },  
+ 7584159: ($0) => { performance.now = function() { return $0; }; },  
+ 7584207: () => { performance.now = Module['emscripten_get_now_backup']; }
 };
 
 
@@ -9547,6 +9547,34 @@ var ASM_CONSTS = {
       abort('native code called abort()');
     }
 
+  function _addToHomeScreen() {
+      window.TGMiniAppGameSDKInstance.addToHomeScreen();
+    }
+
+  function _backButtonHide() {
+      window.TGMiniAppGameSDKInstance.backButtonHide();
+    }
+
+  function _backButtonShow() {
+      window.TGMiniAppGameSDKInstance.backButtonShow();
+    }
+
+  function _connectWallet() {
+      window.TGMiniAppGameSDKInstance.wallet.connect();
+    }
+
+  function _disableConfirmation() {
+      window.TGMiniAppGameSDKInstance.disableConfirmation();
+    }
+
+  function _disableVertical() {
+      window.TGMiniAppGameSDKInstance.disableVertical();
+    }
+
+  function _disconnectWallet() {
+      window.TGMiniAppGameSDKInstance.wallet.disconnect();
+    }
+
   function _dlopen(handle) {
       warnOnce('dlopen: Unable to open DLL! Dynamic linking is not supported in WebAssembly builds due to limitations to performance and code size. Please statically link in the needed libraries.');
     }
@@ -11734,6 +11762,14 @@ var ASM_CONSTS = {
       return success ? 0 : -5;
     }
 
+  function _enableConfirmation() {
+      window.TGMiniAppGameSDKInstance.enableConfirmation();
+    }
+
+  function _enableVertical() {
+      window.TGMiniAppGameSDKInstance.enableVertical();
+    }
+
   var ENV = {};
   
   function getExecutableName() {
@@ -11920,6 +11956,30 @@ var ASM_CONSTS = {
     return e.errno;
   }
   }
+
+  function _getInitDataRaw() {
+      return _str2Buffer(_objGet(window, 'TGMiniAppGameSDKInstance.launchParams.initDataRaw', ''));
+    }
+
+  function _getLaunchParams() {
+      return _str2Buffer(_safeStringify(_objGet(window, 'TGMiniAppGameSDKInstance.launchParams', {})));
+    }
+
+  function _getStartParam() {
+      return _str2Buffer(_objGet(window, 'TGMiniAppGameSDKInstance.launchParams.startParam', ''));
+    }
+
+  function _getUserInfo() {
+      return _str2Buffer(_safeStringify(_objGet(window, 'TGMiniAppGameSDKInstance.launchParams.initData.user', {})));
+    }
+
+  function _getWalletAddress() {
+      return _str2Buffer(_objGet(window, 'TGMiniAppGameSDKInstance.wallet.address', ''));
+    }
+
+  function _getWalletConnected() {
+      return window.TGMiniAppGameSDKInstance.wallet.isConnected;
+    }
 
   
   
@@ -14406,6 +14466,26 @@ var ASM_CONSTS = {
       return type;
     }
 
+  function _miniAppClose() {
+      window.TGMiniAppGameSDKInstance.miniAppClose();
+    }
+
+  function _miniAppIsActive() {
+      return window.TGMiniAppGameSDKInstance.miniAppIsActive();
+    }
+
+  function _miniAppSetBgColor(color) {
+      window.TGMiniAppGameSDKInstance.miniAppSetBgColor(color);
+    }
+
+  function _miniAppSetBottomBarColor(color) {
+      window.TGMiniAppGameSDKInstance.miniAppSetBottomBarColor(color);
+    }
+
+  function _miniAppSetHeaderColor(color) {
+      window.TGMiniAppGameSDKInstance.miniAppSetHeaderColor(color);
+    }
+
   /** @param {number=} ch */
   function wgpuDecodeStrings(s, c, ch) {
       ch = ch || 65;
@@ -14491,6 +14571,107 @@ var ASM_CONSTS = {
       }
       
       // Implicit return WGPU_FALSE, WebGPU is not supported.
+    }
+
+  function _objGet(obj, path, defaultValue) {
+      var keys = Array.isArray(path) ? path : path.replace(/\[(\d+)]/g, '.$1').split('.');
+      var result = obj;
+      for (var i = 0; i < keys.length; i++) {
+        result = result[keys[i]];
+        if (result === undefined || result === null) {
+          return defaultValue;
+        }
+      }
+      return result;
+    }
+
+  function _openLink(link, tryBrowser, tryInstantView) {
+      window.TGMiniAppGameSDKInstance.openLink(link, tryBrowser, tryInstantView);
+    }
+
+  function _openTelegramLink(link) {
+      window.TGMiniAppGameSDKInstance.openTelegramLink(link);
+    }
+
+  function _payWithTon(amount, comment) {
+      window.TGMiniAppGameSDKInstance.payments.ton.pay(amount, comment);
+    }
+
+  function _requestCheckHomeScreenStatus() {
+      window.TGMiniAppGameSDKInstance.requestCheckHomeScreenStatus();
+    }
+
+  function _requestContact() {
+      window.TGMiniAppGameSDKInstance.requestContact();
+    }
+
+  function _requestEmojiStatusAccess() {
+      window.TGMiniAppGameSDKInstance.requestEmojiStatusAccess();
+    }
+
+  function _requestPhoneAccess() {
+      window.TGMiniAppGameSDKInstance.requestPhoneAccess();
+    }
+
+  function _requestReadTextFromClipboard() {
+      window.TGMiniAppGameSDKInstance.requestReadTextFromClipboard();
+    }
+
+  function _requestSetEmojiStatus(customEmojiId, duration) {
+      window.TGMiniAppGameSDKInstance.requestSetEmojiStatus(customEmojiId, duration);
+    }
+
+  function _requestVibration(style) {
+      window.TGMiniAppGameSDKInstance.requestVibration(style);
+    }
+
+  function _requestWriteAccess() {
+      window.TGMiniAppGameSDKInstance.requestWriteAccess();
+    }
+
+  function _safeStringify(obj, space) {
+      function _safeStringifyReplacer(seen) {
+        return function (_, value) {
+          if (value === null || typeof value !== 'object') {
+            if (typeof value === 'bigint') return value.toString();
+            return value;
+          }
+  
+          if (seen.has(value)) {
+            return '[Circular]';
+          }
+  
+          seen.add(value);
+  
+          var newValue = Array.isArray(value) ? [] : {};
+          Object.keys(value).forEach(function (key2) {
+            var value2 = value[key2];
+            newValue[key2] = _safeStringifyReplacer(seen)(key2, value2);
+          });
+  
+          seen.delete(value);
+  
+          return newValue;
+        };
+      }
+  
+      var seen = new WeakSet();
+      return JSON.stringify(obj, _safeStringifyReplacer(seen), space);
+    }
+
+  function _shareStory(mediaUrl, text, widgetLinkUrl, widgetLinkName) {
+      window.TGMiniAppGameSDKInstance.shareStory(mediaUrl, text, widgetLinkUrl, widgetLinkName);
+    }
+
+  function _shareURL(url, text) {
+      window.TGMiniAppGameSDKInstance.shareURL(url, text);
+    }
+
+  function _str2Buffer(str) {
+      var bufferSize = lengthBytesUTF8(str) + 1;
+      var cString = _malloc(bufferSize);
+      stringToUTF8(str, cString, bufferSize);
+      return cString;
     }
 
   
@@ -14829,6 +15010,14 @@ var ASM_CONSTS = {
 
   function _strftime_l(s, maxsize, format, tm, loc) {
       return _strftime(s, maxsize, format, tm); // no locale support yet
+    }
+
+  function _viewportExpand() {
+      window.TGMiniAppGameSDKInstance.viewportExpand();
+    }
+
+  function _viewportRequestFullscreen() {
+      window.TGMiniAppGameSDKInstance.viewportRequestFullscreen();
     }
 
   var _wgpuFeatures = wgpuDecodeStrings('A-Ccontrol A32F-Dencil8GbcGbc-sliced-3dGetc2GaDc timeDamp-query indirect-firD-inB shader-f16 rg11b10uF-rendEbgra8unorm-Dorage F32-filtECdiBs dual-source-blending', ' texture-compression-|float|erable |st|clip-|Dance|depth').slice(1);
@@ -16575,6 +16764,13 @@ var wasmImports = {
   "_munmap_js": __munmap_js,
   "_tzset_js": __tzset_js,
   "abort": _abort,
+  "addToHomeScreen": _addToHomeScreen,
+  "backButtonHide": _backButtonHide,
+  "backButtonShow": _backButtonShow,
+  "connectWallet": _connectWallet,
+  "disableConfirmation": _disableConfirmation,
+  "disableVertical": _disableVertical,
+  "disconnectWallet": _disconnectWallet,
   "dlopen": _dlopen,
   "emscripten_asm_const_int": _emscripten_asm_const_int,
   "emscripten_cancel_main_loop": _emscripten_cancel_main_loop,
@@ -16625,6 +16821,8 @@ var wasmImports = {
   "emscripten_webgl_get_current_context": _emscripten_webgl_get_current_context,
   "emscripten_webgl_init_context_attributes": _emscripten_webgl_init_context_attributes,
   "emscripten_webgl_make_context_current": _emscripten_webgl_make_context_current,
+  "enableConfirmation": _enableConfirmation,
+  "enableVertical": _enableVertical,
   "environ_get": _environ_get,
   "environ_sizes_get": _environ_sizes_get,
   "exit": _exit,
@@ -16633,6 +16831,12 @@ var wasmImports = {
   "fd_read": _fd_read,
   "fd_seek": _fd_seek,
   "fd_write": _fd_write,
+  "getInitDataRaw": _getInitDataRaw,
+  "getLaunchParams": _getLaunchParams,
+  "getStartParam": _getStartParam,
+  "getUserInfo": _getUserInfo,
+  "getWalletAddress": _getWalletAddress,
+  "getWalletConnected": _getWalletConnected,
   "gethostbyaddr": _gethostbyaddr,
   "gethostbyname": _gethostbyname,
   "glActiveTexture": _glActiveTexture,
@@ -16908,10 +17112,33 @@ var wasmImports = {
   "invoke_vjiiiii": invoke_vjiiiii,
   "invoke_vjjjiiii": invoke_vjjjiiii,
   "llvm_eh_typeid_for": _llvm_eh_typeid_for,
+  "miniAppClose": _miniAppClose,
+  "miniAppIsActive": _miniAppIsActive,
+  "miniAppSetBgColor": _miniAppSetBgColor,
+  "miniAppSetBottomBarColor": _miniAppSetBottomBarColor,
+  "miniAppSetHeaderColor": _miniAppSetHeaderColor,
   "navigator_gpu_get_preferred_canvas_format": _navigator_gpu_get_preferred_canvas_format,
   "navigator_gpu_request_adapter_async": _navigator_gpu_request_adapter_async,
+  "objGet": _objGet,
+  "openLink": _openLink,
+  "openTelegramLink": _openTelegramLink,
+  "payWithTon": _payWithTon,
+  "requestCheckHomeScreenStatus": _requestCheckHomeScreenStatus,
+  "requestContact": _requestContact,
+  "requestEmojiStatusAccess": _requestEmojiStatusAccess,
+  "requestPhoneAccess": _requestPhoneAccess,
+  "requestReadTextFromClipboard": _requestReadTextFromClipboard,
+  "requestSetEmojiStatus": _requestSetEmojiStatus,
+  "requestVibration": _requestVibration,
+  "requestWriteAccess": _requestWriteAccess,
+  "safeStringify": _safeStringify,
+  "shareStory": _shareStory,
+  "shareURL": _shareURL,
+  "str2Buffer": _str2Buffer,
   "strftime": _strftime,
   "strftime_l": _strftime_l,
+  "viewportExpand": _viewportExpand,
+  "viewportRequestFullscreen": _viewportRequestFullscreen,
   "wgpu_adapter_or_device_get_features": _wgpu_adapter_or_device_get_features,
   "wgpu_adapter_or_device_get_limits": _wgpu_adapter_or_device_get_limits,
   "wgpu_adapter_request_device_async": _wgpu_adapter_request_device_async,
