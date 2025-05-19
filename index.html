@@ -9,6 +9,9 @@
     <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
   </head>
   <body>
+    <div id="portrait-overlay">
+      Rotate to landscape
+    </div>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=1920 height=1080 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
@@ -102,6 +105,7 @@
           document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
               }).then((unityInstance) => {
                 document.querySelector("#unity-loading-bar").style.display = "none";
+                
 
                 // Unloading web content from DOM so that browser GC can run can be tricky to get right.
                 // This code snippet shows how to correctly implement a Unity content Unload mechanism to a web page.
@@ -138,7 +142,7 @@
                 alert(message);
               });
             };
-
+      
       document.body.appendChild(script);
     </script>
   </body>

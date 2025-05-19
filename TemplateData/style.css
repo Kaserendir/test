@@ -14,3 +14,13 @@ body { padding: 0; margin: 0; background: #1a1a1a }
 #unity-build-title { float: right; margin-right: 10px; line-height: 38px; font-family: arial; font-size: 18px }
 #unity-fullscreen-button { cursor:pointer; float: right; width: 38px; height: 38px; background: url('fullscreen-button.png') no-repeat center }
 #unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
+
+#portrait-overlay {
+    background: black;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center; 
+}
+@media (orientation: landscape) { #portrait-overlay { display: none; } }
+@media (orientation: portrait) { #portrait-overlay { display: flex; } }
