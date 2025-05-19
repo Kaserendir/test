@@ -9,9 +9,6 @@
   <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
 </head>
 <body>
-<div id="portrait-overlay">
-  Rotate to landscape
-</div>
 <div id="unity-container" class="unity-desktop">
   <canvas id="unity-canvas" width=1920 height=1080 tabindex="-1"></canvas>
   <div id="unity-loading-bar">
@@ -20,8 +17,12 @@
       <div id="unity-progress-bar-full"></div>
     </div>
   </div>
-  <div id="unity-warning"> </div>
 </div>
+<div id="portrait-overlay">
+  Rotate to landscape
+</div>
+<div id="unity-warning"></div>
+<div id="unity-error"></div>
 <script>
   var canvas = document.querySelector("#unity-canvas");
 
@@ -32,23 +33,18 @@
   // way that non-critical warnings and error messages are presented to the
   // user.
   function unityShowBanner(msg, type) {
-    var warningBanner = document.querySelector("#unity-warning");
-    if (warningBanner == null) return;
-    function updateBannerVisibility() {
-      warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
-    }
-    var div = document.createElement('div');
-    div.innerHTML = msg;
-    warningBanner.appendChild(div);
-    if (type == 'error') div.style = 'background: red; padding: 10px;';
-    else {
-      if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+    var banner
+    if (type === 'error') {
+      banner = document.querySelector("#unity-error");
+    } else if (type === 'warning') {
+      banner = document.querySelector("#unity-warning");
       setTimeout(function() {
-        warningBanner.removeChild(div);
-        updateBannerVisibility();
+        banner.style.display = 'none';
       }, 5000);
+    } else {
+      return;
     }
-    updateBannerVisibility();
+    banner.style.display = 'block';
   }
 
   var buildUrl = "Build";
