@@ -21,6 +21,7 @@ body { padding: 0; margin: 0; background: #1a1a1a }
     height: 100vh;
     justify-content: center;
     align-items: center; 
+    color: white;
 }
 @media (orientation: landscape) { #portrait-overlay { display: none; } }
 @media (orientation: portrait) { #portrait-overlay { display: flex; } }
